@@ -11,10 +11,10 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from .database_settings import get_default_database
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -25,8 +25,7 @@ SECRET_KEY = 'i9$_ycr-e@r537^t*(!ex_=a0w9s^-v3s5a@u3j*m3az17+9f7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['127.0.0.1', 'wavylife.ru']
 
 # Application definition
 
@@ -36,7 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    # 'django.contrib.staticfiles',
     'main_app',
     'about_app',
     'user_app',
@@ -61,7 +60,7 @@ ROOT_URLCONF = 'parrot_blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,17 +75,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'parrot_blog.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': get_default_database(database_file_path=os.path.join(BASE_DIR, 'db.sqlite3'))
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -106,7 +100,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -120,18 +113,18 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'static')
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR,'static')
+# ]
 
-LOGIN_URL='/users/login/'
-LOGIN_REDIRECT_URL='/users/login/'
+LOGIN_URL = '/users/login/'
+LOGIN_REDIRECT_URL = '/users/login/'
 
 MEDIA_ROOT = 'media'
 MEDIA_URL = '/media/'
@@ -139,7 +132,6 @@ MEDIA_URL = '/media/'
 PAGE_HEADER = 'page_header'
 PAGE_SUBHEADER = 'page_subheader'
 PAGE_IMAGE_URL = 'page_image_url'
-
 
 # ckeditor
 
@@ -169,13 +161,13 @@ CKEDITOR_CONFIGS = {
              '-', 'Image',
              '-', 'Source',
              '-', 'NumberedList', 'BulletedList'
-            ],
+             ],
             ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock',
              '-', 'Font', 'FontSize', 'TextColor',
              '-', 'Outdent', 'Indent',
              '-', 'HorizontalRule',
              '-', 'Blockquote'
-            ]
+             ]
         ],
         'height': 500,
         'width': '100%',

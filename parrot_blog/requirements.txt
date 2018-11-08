@@ -1,0 +1,7 @@
+django
+django-ckeditor
+django-cleanup
+django-imagekit
+pillow
+wheel
+mysqlclient
