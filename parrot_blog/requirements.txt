@@ -3,5 +3,6 @@ django-ckeditor
 django-cleanup
 django-imagekit
 pillow
-wheel
-mysqlclient
+psycopg2
+psycopg2-binary
+

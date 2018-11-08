@@ -25,7 +25,7 @@ SECRET_KEY = 'i9$_ycr-e@r537^t*(!ex_=a0w9s^-v3s5a@u3j*m3az17+9f7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'wavylife.ru']
+ALLOWED_HOSTS = ['127.0.0.1', '151.248.121.11']
 
 # Application definition
 
@@ -78,9 +78,29 @@ WSGI_APPLICATION = 'parrot_blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
+
 DATABASES = {
     'default': get_default_database(database_file_path=os.path.join(BASE_DIR, 'db.sqlite3'))
 }
+
+# if DEBUG:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         }
+#     }
+# else:
+#     DATABASES = {
+#         'default': {
+#             'NAME': 'wavymain',
+#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#             'USER': 'admin',
+#             'PASSWORD': '',
+#             'HOST': '127.0.0.1',
+#             'PORT': '5432'
+#         }
+#     }
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
