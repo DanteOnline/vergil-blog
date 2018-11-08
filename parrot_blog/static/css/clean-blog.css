@@ -24,9 +24,9 @@ h6 {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 200;
 }
-a {
+/* a {
   color: #333333;
-}
+} */
 a:hover,
 a:focus {
   color: #0085A1;
@@ -231,13 +231,14 @@ hr.small {
     font-size: 30px;
   }
 }
-.post-preview > a {
+/*.post-preview > a {
   color: #333333;
-}
+} */
 .post-preview > a:hover,
 .post-preview > a:focus {
   text-decoration: none;
-  color: #0085A1;
+  /* color: #0085A1; */
+  color: #0033FF
 }
 .post-preview > a > .post-title {
   font-size: 30px;
@@ -257,7 +258,7 @@ hr.small {
 }
 .post-preview > .post-meta > a {
   text-decoration: none;
-  color: #333333;
+  /* color: #333333; */
 }
 .post-preview > .post-meta > a:hover,
 .post-preview > .post-meta > a:focus {

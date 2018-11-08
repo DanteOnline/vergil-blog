@@ -16,7 +16,7 @@
 
                             {% if post.video_code_url %}
                                 <!--{% include 'inc/video_modal.html' %}-->
-                            <a href="{{post.video_code_url}}" class="youtuber">
+                            <a href="{{post.video_code_url}}" target="_blank">
                                 <img src="{{post.image_thumbnail.url}}" class="img-thumbnail center-block" >
                             </a>
                             {% else %}
@@ -35,6 +35,18 @@
                                 </h3>
                             </a>
                              <p class="post-meta">Автор: <a href="">{{post.user.username}}</a></p>
+                            <p class="post-meta">Видео:
+                                {% if post.video_code_url %}
+                                <!--{% include 'inc/video_modal.html' %}-->
+                                    <a href="{{post.video_code_url}}" target="_blank">
+                                        Смотреть видео
+                                    </a>
+                                {% else %}
+                                    <a href="#">
+                                        Нет
+                                    </a>
+                                {% endif %}
+                            </p>
                             <p class="post-meta">{{post.post_datetime}}</p>
                             <p class="post-meta">
                                 {{post.preview_text}}
@@ -53,6 +65,12 @@
                             <!--{% endif %}-->
 
                                 <a href="{% url 'posts:post' pk=post.pk %}">Читать &rarr;</a>
+                                {% if post.video_code_url %}
+                                <!--{% include 'inc/video_modal.html' %}-->
+                                <a href="{{post.video_code_url}}" target="_blank">
+                                    Смотреть видео &rarr;
+                                </a>
+                                {% endif %}
                         <!--{% if user|has_perm:'main_app.edit_post' %}-->
                             <!--<a href="{% url 'posts:edit_post' pk=post.pk %}">Редактировать &rarr;</a>-->
                         <!--{% endif %}-->
