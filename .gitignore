@@ -104,5 +104,8 @@ venv.bak/
 .mypy_cache/
 
 # exclude database_settings
-*database_settings.py
 /wavylife/
+*production_settings.py
+
+# idea
+.idea
