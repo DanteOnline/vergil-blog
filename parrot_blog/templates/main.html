@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load imagekit %}
+{% block main %}
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="{% url 'posts:index' %}"><span><img src="/static/img/backgrounds/logo.png" width="50px" height="50px">Blog</span> </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="{% url 'posts:index' %}">главная</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'about:about' %}">о сайте</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                        {% if user.is_superuser %}
+                            <li><a href="">привет,  {{user.username}} (АДМИН)</a></li>
+                        {% else %}
+                            <li><a href="">привет,  {{user.username}}</a></li>
+                        {% endif %}
+                        <li><a href="{% url 'users:logout' %}">Выйти</a></li>
+                    {% else %}
+                        <li><a href="{% url 'users:registration' %}"><span class="glyphicon glyphicon-user"></span>Регистрация</a></li>
+                        <li><a href="{% url 'users:login' %}"><span class="glyphicon glyphicon-log-in"></span>Войти</a></li>
+                    {% endif %}
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    {% block header %}
+
+        <header class="intro-header"
+                style="background-image: {% if page_image_url %} url('{{page_image_url}}')
+                {% else %}
+                url('/static/img/backgrounds/black.jpg/')
+                {% endif %}">
+            <!--<canvas id="main" width="800" height="400">-->
+            <!--</canvas>-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="site-heading">
+                            <h1>{{page_header}}</h1>
+                            <hr class="small">
+                            <span class="subheading">{{page_subheader}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+    {% endblock %}
+    <!-- Main Content -->
+    <div class="container">
+        {% include 'inc/messages.html' %}
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; Vergil Blog {% now "Y" %}</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}

@@ -1,0 +1,9 @@
+<div class="row control-group">
+    <div class="form-group col-xs-12 floating-label-form-group controls">
+        <label>{{field.label_tag}}</label>
+        {{field}}
+        {% for error in field.errors %}
+            <p class="text-danger">{{error}}</p>
+        {% endfor %}
+    </div>
+</div>

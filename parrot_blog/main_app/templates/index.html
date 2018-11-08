@@ -1,0 +1,53 @@
+{% extends "main.html" %}
+{% load staticfiles %}
+{% load post_tags %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            {% include 'inc/add_post_href.html' %}
+
+            {% for post in posts %}
+                <div class="post-preview">
+
+                    <a href="{% url 'posts:post' pk=post.pk %}">
+                        <h2 class="post-title">
+                            {{post.title}}
+                        </h2>
+                        <h3 class="post-subtitle">
+                            {{post.subtitle}}
+                        </h3>
+                    </a>
+                    {# <p class="post-meta">Автор: <a href="">{{post.user.username}}</a></p> #}
+                    <p class="post-meta">{{post.post_datetime}}</p>
+                    {% if user|has_perm:'main_app.moderate_post' or post.user == user %}
+                        {% if post.is_active %}
+                            <p class="text-success">
+                                Активен
+                            </p>
+                        {% else %}
+                            <p class="text-danger">
+                                На модерации
+                            </p>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <a href="{% url 'posts:post' pk=post.pk %}">Читать &rarr;</a>
+                {% if user|has_perm:'main_app.edit_post' %}
+                    <a href="{% url 'posts:edit_post' pk=post.pk %}">Редактировать &rarr;</a>
+                {% endif %}
+                {% if user|has_perm:'main_app.drop_post' %}
+                    <a href="{% url 'posts:delete_post' pk=post.pk %}">Удалить &otimes;</a>
+                {% endif %}
+
+                <hr>
+            {% endfor %}
+
+            {% include 'inc/add_post_href.html' %}
+
+            <div class="float-right">
+                {% include 'inc/pagination.html' %}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "main.html" %}
+{% load staticfiles %}
+{% block title %}
+    {{post.title}}
+{% endblock %}
+{% block header %}
+    <!--<header class="intro-header" style="background-image: url('{{post.post_thumb.url}}')">-->
+    <header class="intro-header" style="background-image: url('{{post.backgroud_picture}}')">
+        <!--<div class="grey-filter">-->
+        <!--</div>-->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>{{post.title}}</h1>
+                        <h2 class="subheading">{{post.subtitle}}</h2>
+                        <span class="meta">{{post.post_datetime}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+{% endblock %}
+{% block content %}
+    {{post.text|safe}}
+{% endblock %}

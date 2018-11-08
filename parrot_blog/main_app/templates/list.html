@@ -1,0 +1,91 @@
+{% extends "main.html" %}
+{% load staticfiles %}
+{% load post_tags %}
+{% block content %}
+
+
+            <!--{% include 'inc/add_post_href.html' %}-->
+            <div class="row">
+                {% for post in posts %}
+                    <!--<div class="col-lg-6 col-md-6">-->
+                        <!---->
+                    <!--</div>-->
+                    <div class="col-lg-4 col-md-4">
+
+                        <div class="post-preview">
+
+                            {% if post.video_code_url %}
+                                <!--{% include 'inc/video_modal.html' %}-->
+                            <a href="{{post.video_code_url}}" class="youtuber">
+                                <img src="{{post.image_thumbnail.url}}" class="img-thumbnail center-block" >
+                            </a>
+                            {% else %}
+                                <img src="{{post.image_thumbnail.url}}" class="img-thumbnail center-block" >
+                            {% endif %}
+
+
+
+
+                            <a href="{% url 'posts:post' pk=post.pk %}">
+                                <h2 class="post-title">
+                                    {{post.title}}
+                                </h2>
+                                <h3 class="post-subtitle">
+                                    {{post.subtitle}}
+                                </h3>
+                            </a>
+                             <p class="post-meta">Автор: <a href="">{{post.user.username}}</a></p>
+                            <p class="post-meta">{{post.post_datetime}}</p>
+                            <p class="post-meta">
+                                {{post.preview_text}}
+                            </p>
+
+                            <!--{% if user|has_perm:'main_app.moderate_post' or post.user == user %}-->
+                                <!--{% if post.is_active %}-->
+                                    <!--<p class="text-success">-->
+                                        <!--Активен-->
+                                    <!--</p>-->
+                                <!--{% else %}-->
+                                    <!--<p class="text-danger">-->
+                                        <!--На модерации-->
+                                    <!--</p>-->
+                                <!--{% endif %}-->
+                            <!--{% endif %}-->
+
+                                <a href="{% url 'posts:post' pk=post.pk %}">Читать &rarr;</a>
+                        <!--{% if user|has_perm:'main_app.edit_post' %}-->
+                            <!--<a href="{% url 'posts:edit_post' pk=post.pk %}">Редактировать &rarr;</a>-->
+                        <!--{% endif %}-->
+                        <!--{% if user|has_perm:'main_app.drop_post' %}-->
+                            <!--<a href="{% url 'posts:delete_post' pk=post.pk %}">Удалить &otimes;</a>-->
+                        <!--{% endif %}-->
+
+
+                        </div>
+                        <hr>
+
+                    </div>
+                    <!--{% if forloop.counter|divisibleby:3 %}-->
+                        <!--&lt;!&ndash;Закрываем row&ndash;&gt;-->
+                         <!--</div>-->
+                        <!--&lt;!&ndash;Снова открываем row&ndash;&gt;-->
+                        <!--<div class="row">-->
+                    <!--{% endif %}-->
+            {% endfor %}
+<!--Закрываем row-->
+                </div>
+
+<!--Модальное окно для видео-->
+<!--{% include 'inc/video_modal.html' %}-->
+
+            <!--{% include 'inc/add_post_href.html' %}-->
+
+
+
+
+
+    <div class="row">
+        {% include 'inc/pagination.html' %}
+    </div>
+
+{% endblock %}

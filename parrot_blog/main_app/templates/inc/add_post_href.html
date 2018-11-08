@@ -1,0 +1,8 @@
+{% load post_tags %}
+{% if user|has_perm:'main_app.create_post' %}
+<ul class="pager">
+    <li class="next">
+        <a href="{% url 'posts:add_post' %}">Добавить пост &rarr;</a>
+    </li>
+</ul>
+{% endif %}

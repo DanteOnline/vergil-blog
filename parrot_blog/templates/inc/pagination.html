@@ -1,0 +1,24 @@
+{% load post_tags %}
+
+{% if is_paginated %}
+    <ul class="pagination float-right">
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="{% url 'posts:index' %}?page={{page_obj.page_obj.previous_page_number}}">&lt;&lt;</a>
+            </li>
+        {% endif %}
+
+        {%for page_number in page_obj.paginator.num_pages|times:1 %}
+        <li class="page-item {% if page_number == page_obj.number %}active{% endif %}">
+            <a class="page-link" href="{% url 'posts:index' %}?page={{page_number}}">{{page_number}}</a>
+        </li>
+        {% endfor %}
+
+       {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="{% url 'posts:index' %}?page={{page_obj.next_page_number}}">&gt;&gt;</a>
+            </li>
+        {% endif %}
+
+  </ul>
+{% endif %}
