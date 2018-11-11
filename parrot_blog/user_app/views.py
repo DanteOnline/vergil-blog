@@ -5,6 +5,7 @@ from django.conf import settings
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, FormView
 
+from main_app.views import random_picture
 from user_app.models import BlogUser
 from .forms import BlogUserRegistrationForm, BlogUserAuthenticationForm
 
@@ -50,3 +51,12 @@ class BlogUserCreateView(SuccessMessageMixin, CreateView):
     success_message = 'Вы успешно зарегистрировались'
     template_name = 'registration.html'
     form_class = BlogUserRegistrationForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context.update({
+            settings.PAGE_HEADER: 'Регистрация',
+            settings.PAGE_SUBHEADER: 'Присоединяйтесь. Будем знакомы',
+            settings.PAGE_IMAGE_URL: random_picture(['violet.jpg', 'blue.jpg'])
+        })
+        return context

@@ -15,12 +15,12 @@ from .models import Post
 from .forms import PostForm
 
 
-def random_picture():
-    pictures = [
-        'black.jpg',
-        'empty.jpg',
-        'violet.jpg'
-    ]
+def random_picture(pictures):
+    # pictures = [
+    #     'black.jpg',
+    #     'violet.jpg',
+    #     'blue.jpg'
+    # ]
 
     r_image = choice(pictures)
     url = '/static/img/backgrounds/{}'.format(r_image)
@@ -41,7 +41,7 @@ class PostListView(ListView):
         # context[settings.PAGE_IMAGE_URL] = '/static/img/backgrounds/all_parrots_black.jpg/'
         # context[settings.PAGE_IMAGE_URL] = '/static/img/backgrounds/vergil.jpg/'
         #context[settings.PAGE_IMAGE_URL] = '/static/img/backgrounds/cockatoo_pink.jpg/'
-        context[settings.PAGE_IMAGE_URL] = random_picture()
+        context[settings.PAGE_IMAGE_URL] = random_picture(['violet.jpg', 'blue.jpg'])
 
         return context
 
@@ -138,7 +138,7 @@ class PostDetailView(DetailView):
 
     def get_object(self, queryset=None):
         obj = super().get_object(queryset=queryset)
-        obj.backgroud_picture = random_picture()
+        obj.backgroud_picture = random_picture(['violet.jpg', 'blue.jpg'])
         if obj.is_active:
             return obj
         else:
