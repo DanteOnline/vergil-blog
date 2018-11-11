@@ -46,11 +46,7 @@
     <!-- Set your background image for this header on the line below. -->
     {% block header %}
 
-        <header class="intro-header"
-                style="background-image: {% if page_image_url %} url('{{page_image_url}}')
-                {% else %}
-                url('/static/img/backgrounds/violet.jpg/')
-                {% endif %}">
+        <header class="intro-header" style="background-image: {% if page_image_url %} url('{{page_image_url}}') {% else %} url('{% static 'img/backgrounds/violet.jpg' %}') {% endif %}">
             <!--<canvas id="main" width="800" height="400">-->
             <!--</canvas>-->
             <div class="container">
